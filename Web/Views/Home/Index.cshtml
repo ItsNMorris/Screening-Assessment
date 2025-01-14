@@ -31,20 +31,58 @@
     <div class="col">
         <div class="mb-5">
             <h3>Add your solution to question 2 here</h3>
-
-            <p><button>Increment number by 1</button></p>
-            <p><span>1</span></p>
+            <form id="incrementCounterForm" method="post" asp-action="Increment">
+                <button type="submit">Increment number by 1</button>
+            </form>
+            <div id="counterPartial">
+                @await Html.PartialAsync("_CounterPartial")
+            </div>
             <hr/>
         </div>
 
         <div class="mb-5">
-            <h3>Add your solution to question 3 here</h3>
+            <h3>Add your solution to question 4 here</h3> <!-- Tweaked question number as answer applies to Q4, not Q3 -->
+            <form id="reverseStringForm" method="post" asp-action="ReverseString">
+                <input type="text" id="stringToReverse" name="stringToReverse" required/>
+                <button type="submit">Reverse</button>
+            </form>
+            <div id="reverseStringPartial">
+                @await Html.PartialAsync("_ReverseStringPartial")
+            </div>
             <hr/>
         </div>
 
         <div class="mb-5">
             <h4>How did you find this assessment?</h4>
             @* Write here *@
+            <p>
+                Upon first glance, the confident developer in me said "easy"... but these questions definitely got me thinking!
+            </p>
+            <p>
+                <b>Q1:</b>
+                By default, Hot Reload seems to be enabled in a project; I have never had to configure anything to get this to work in Visual Studio or Rider. For the purpose of demonstrating my knowledge, I enabled the 'hotReloadEnabled' flag for both launch profiles but Hot Reload does work with/without this setting. If I force it to 'false' then Hot Reload is disabled, of course.
+            </p>
+            <p>
+                <b>Q2:</b>
+                I used the included JQuery library to make an AJAX call to reload a partial view. There were a few design choices that contributed to my final result:
+            </p>
+            <ul>
+                <li>AJAX: I chose AJAX instead of a regular asp-action redirect to a Controller action. The call is made in the background as a result. I'll admit, I did have to quickly refresh myself on AJAX syntax as it's been a while since I've worked with anything other than a Blazor front-end!</li>
+                <li>Partial Views: To ensure only the changed elements are refreshed, the use of Partial Views prevents an entire reload of all site resources from occurring. Both parties can reap the performance benefits of this.</li>
+                <li>Session State: To meet the 'server-side' requirement, Session State in MVC will store session data in memory on the server.</li>
+                <li>ViewData: To ensure I don't directly access Session data from the Client side - this is bad practice. ViewData is a readable, debuggable means of returning data to the client.</li>
+            </ul>
+            <p>
+                <b>Q3:</b>
+                Probably the easiest of the questions. Implemented as a separate controller rather than piggybacking off the Home Controller as this is how I would architect in a real project. Before the server returns the view, it populates ViewData with the Counter value from Session storage.
+            </p>
+            <p>
+                <b>Q4:</b>
+                Similar to Q2, I used an AJAX call to submit a form which will send a string to the server side for processing. Like Q1, a partial view is updated instead of a full page reload. Reversing the words is as simple as splitting on ' ' and reversing the resulting array. Similarly, to reverse the characters, I convert to a CharArray and reverse the resulting array. Most people should be on new browsers which support the HTML5 validation I added, although I know there are potential end users who will be on older browsers that do not support this.
+            </p>
+            <p>Overall, I spent ~50 minutes on this - quite a significant proportion of which I would say has been on providing a detailed summary. The questions were simple but very engaging as there are multiple solutions to each with their unique pros/cons.</p>
+            <p>I understand from first-hand experience that adding a new project to separate your services/logic is not always possible (e.g. if you are working within a legacy app or an extremely restricted/changed-controlled environment) so I resisted the urge to abstract this all out of the web project so that I stay within scope of this assessment.</p>
+            <p><b>I look forward to your feedback! :)<br/>- Nathan</b></p>
         </div>
     </div>
 </div>

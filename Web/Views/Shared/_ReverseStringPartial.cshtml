@@ -1,0 +1,12 @@
+@if (ViewData["StringCharacterReverse"] != null && ViewData["StringSentenceReverse"] != null)
+{
+    <p>
+        Characters Reversed: @ViewData["StringCharacterReverse"]
+        <br/>
+        Sentences Reversed: @ViewData["StringSentenceReverse"]
+    </p>
+}
+else
+{
+    <p>@ViewData["Error"]</p>
+}

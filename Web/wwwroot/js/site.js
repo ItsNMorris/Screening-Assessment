@@ -1,4 +1,35 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿// AJAX Call for Counter Increment
+$(document).ready(function () {
+    $('#incrementCounterForm').on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: $(this).attr('action'),
+            type: $(this).attr('method'),
+            data: $(this).serialize(),
+            success: function (result) {
+                $('#counterPartial').html(result);
+            },
+            error: function () {
+                alert('An error occurred retrieving the counter value.');
+            }
+        });
+    });
+});
 
-// Write your JavaScript code.
+// AJAX Call for String Reverse
+$(document).ready(function () {
+    $('#reverseStringForm').on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: $(this).attr('action'),
+            type: $(this).attr('method'),
+            data: $(this).serialize(),
+            success: function (result) {
+                $('#reverseStringPartial').html(result);
+            },
+            error: function () {
+                alert('An error occurred while attempting to reverse string value.');
+            }
+        });
+    });
+});
